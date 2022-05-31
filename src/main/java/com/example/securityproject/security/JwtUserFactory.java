@@ -1,8 +1,7 @@
-package com.antra.videomanager.security.factory;
+package com.example.securityproject.security;
 
-import com.antra.videomanager.domain.entity.User;
-import com.antra.videomanager.domain.entity.UserRole;
-import com.antra.videomanager.security.pojo.JwtUser;
+import com.example.securityproject.domain.User;
+import com.example.securityproject.domain.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -17,17 +16,14 @@ public class JwtUserFactory {
     }
 
     public static JwtUser create(User user) {
-        return new JwtUser(
-                user.getUserId(),
-                user.getUsername(),
-                user.getPassword(),
+        return new JwtUser(user,
                 mapToGrantedAuthorities(user.getUserRoleSet())
         );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<UserRole> userRoles) {
         return userRoles.stream()
-                .map(userRole -> new SimpleGrantedAuthority(userRole.getRole_l().getRoleName()))
+                .map(userRole -> new SimpleGrantedAuthority(userRole.getUserRoleId()))
                 .collect(Collectors.toList());
     }
 }

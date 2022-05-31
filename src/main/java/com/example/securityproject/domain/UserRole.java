@@ -1,13 +1,18 @@
-package com.antra.videomanager.domain.entity;
+package com.example.securityproject.domain;
 
-import com.antra.videomanager.domain.entity.base.CommonEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+@Table(name = "userrole")
 @Entity
-@Table(name = "UserRole")
-public class UserRole extends CommonEntity{
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserRole {
 
     @Id
     @GeneratedValue(generator = "user_role_UUID")
@@ -22,39 +27,4 @@ public class UserRole extends CommonEntity{
     @Column(name = "RoleId", insertable = false, updatable = false)
     private Integer roleId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RoleId")
-    private Role_L role_l;
-
-    public String getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(String userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Role_L getRole_l() {
-        return role_l;
-    }
-
-    public void setRole_l(Role_L role_l) {
-        this.role_l = role_l;
-    }
-
-//    public Integer getRoleId() {
-//        return roleId;
-//    }
-//
-//    public void setRoleId(Integer roleId) {
-//        this.roleId = roleId;
-//    }
 }
